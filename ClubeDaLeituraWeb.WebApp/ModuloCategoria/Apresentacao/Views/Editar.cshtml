@@ -17,7 +17,12 @@
 
             <div class="d-flex flex-column mt-3">
                 <strong class="me-2 mb-1 fs-4">Cor:</strong>
-                <input asp-for="Cor" class="form-control fs-5" placeholder="@Model.Cor"></input>
+                <select asp-for="Cor" value="" class="form-select fs-5">
+                    <option href="#">@CorCategoria.Branco.ToString()</option>
+                    <option href="#">@CorCategoria.Azul.ToString()</option>
+                    <option href="#">@CorCategoria.Verde.ToString()</option>
+                    <option href="#">@CorCategoria.Vermelho.ToString()</option>
+                </select>
                 <span asp-validation-for="Cor" class="text-danger small fw-semibold"></span>
             </div>
 
