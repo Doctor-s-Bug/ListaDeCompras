@@ -1,6 +1,7 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra;
+using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Aplicacao;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Infra;
 
@@ -16,9 +17,11 @@ builder.Services.AddScoped(provider =>
 
     return contextoJson;
 });
+//dps tem que fazer a injeção de dependencia
 
 builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixaEmArquivo>();
 builder.Services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
+builder.Services.AddScoped<ServicoCategoria>();
 #endregion
 
 #region Configuração do MVC

@@ -3,37 +3,46 @@
     ViewBag.Titulo = "Listagem de Categorias";
 }
 
-@model List<ListarViewModels>
+@model List<ListarCategoriaViewModels>
 
 <body>
-
-    <div class="row g-3">
-        @foreach (var item in Model)
-        {
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Nome</h5>
-
-                        <p class="card-text mb-2">
-                            <strong>ID:</strong> @item.Id
-                        </p>
-
-                        <div class="d-flex align-items-center">
-                            <strong class="me-2">Cor:</strong>
-
-                            <div style="
-                                width: 25px;
-                                height: 25px;
-                                background-color: @item.CategoriaCor;
-                                border-radius: 50%;
-                                border: 1px solid #ccc;">
+    @if (@Model.Count == 0)
+    {
+        <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+            Nenhuma Categoria Cadastrada.
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">item.Nome</h5>
+                            <p class="card-text mb-2">
+                                <strong>ID:</strong> @item.Id
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <strong class="me-2">Cor:</strong>
+                                <div style="
+                                    width: 25px;
+                                    height: 25px;
+                                    background-color: item.CategoriaCor;
+                                    border-radius: 50%;
+                                    border: 1px solid #ccc;">
+                                </div>
+                                <span class="ms-2">@item.CategoriaCor</span>
                             </div>
-                            <span class="ms-2">@item.CategoriaCor</span>
+                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3" asp-action="Editar"
+                               asp-route-id="@item.Id">Editar</a>
+                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3" asp-action="Excluir"
+                               asp-route-id="@item.Id">Excluir</a>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
+    }
 </body>
