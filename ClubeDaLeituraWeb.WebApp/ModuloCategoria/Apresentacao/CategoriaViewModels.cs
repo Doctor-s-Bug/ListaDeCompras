@@ -2,9 +2,13 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloCategoria.Apresentacao;
 
 public class CategoriaViewModels
 {
-    public record ListarCategoriaViewModels(
+    public record ListarCategoriaViewModel(
         string Id,
         string Nome,
-        string CategoriaCor
+        string Cor
+    );
+    public record CadastrarCategoriaViewModel(
+        string Nome,
+        string Cor
     );
 }

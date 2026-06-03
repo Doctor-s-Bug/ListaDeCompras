@@ -7,13 +7,13 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 public class Categoria : EntidadeBase<Categoria>
 {
     public string Nome { get; set; }
-    public CorCategoria Cor { get; set; }
+    public string Cor { get; set; }
 
     public Categoria()
     {
     }
 
-    public Categoria(string nome, CorCategoria cor)
+    public Categoria(string nome, string cor)
     {
         Nome = nome;
         Cor = cor;
@@ -26,8 +26,8 @@ public class Categoria : EntidadeBase<Categoria>
         if (Nome.Length < 2 || Nome.Length > 50)
             erros.Add("O campo \"Nome\" deve conter entre 2 e 50 caracteres.");
 
-        else if (!Enum.IsDefined<CorCategoria>(Cor))
-            erros.Add("O campo \"Cor\" deve conter uma seleção permitida (Branco, Vermelho, Verde, ou Azul).");
+        else if (Cor.Length < 3 || Cor.Length > 20)
+            erros.Add("O campo \"Cor\" deve conter entre 3 a 20 caracteres.");
 
         return erros;
     }

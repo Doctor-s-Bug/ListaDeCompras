@@ -21,18 +21,33 @@ public class CategoriaController : Controller
     {
         List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
 
-        List<ListarCategoriaViewModels> listarVm = new();
+        List<ListarCategoriaViewModel> listarVm = new();
 
         foreach (Categoria categoria in categorias)
         {
-            ListarCategoriaViewModels vm = new(
+            ListarCategoriaViewModel vm = new(
                 categoria.Id,
                 categoria.Nome,
-                categoria.Cor.ToString()
+                categoria.Cor
             );
             listarVm.Add(vm);
         }
-
         return View(listarVm);
+    }
+    public ActionResult Cadastrar()
+    {
+        return View();
+    }
+    [HttpPost]
+    public ActionResult Cadastrar(CadastrarCategoriaViewModel c)
+    {
+        Categoria novaCategoria = new(
+            c.Nome,
+            c.Cor
+        );
+
+        repositorioCategoria.Cadastrar(novaCategoria);
+
+        return RedirectToAction(nameof(Listar));
     }
 }
