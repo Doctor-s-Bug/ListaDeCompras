@@ -1,0 +1,35 @@
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Edição de Categoria";
+}
+@model EditarCategoriaViewModel;
+
+<form class="card border border-secondary  shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Editar"
+      method="post">
+    <div class="card shadow-sm h-100">
+        <div class="card-body">
+
+            <div class="d-flex flex-column mt-3">
+                <strong class="me-2 mb-1 fs-4">Nome:</strong>
+                <input asp-for="Nome" class="form-control fs-5" placeholder="@Model.Nome"></input>
+                <span asp-validation-for="Nome" class="text-danger small fw-semibold"></span>
+            </div>
+
+            <div class="d-flex flex-column mt-3">
+                <strong class="me-2 mb-1 fs-4">Cor:</strong>
+                <input asp-for="Cor" class="form-control fs-5" placeholder="@Model.Cor"></input>
+                <span asp-validation-for="Cor" class="text-danger small fw-semibold"></span>
+            </div>
+
+            <div class="alert alert-warning mt-4" role="alert ">
+                Deseja Editar Esse Registro?
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+                <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+            </div>
+
+        </div>
+    </div>
+</form>

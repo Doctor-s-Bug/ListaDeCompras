@@ -16,4 +16,9 @@ public class CategoriaViewModels
         string Nome,
         string Cor
     );
+    public record EditarCategoriaViewModel(
+        string Id,
+        string Nome,
+        string Cor
+    );
 }
