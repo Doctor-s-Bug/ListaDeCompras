@@ -1,6 +1,8 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra;
+using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Infra;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,7 @@ builder.Services.AddScoped(provider =>
 });
 
 builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixaEmArquivo>();
-
+builder.Services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
 #endregion
 
 #region Configuração do MVC

@@ -166,7 +166,7 @@ Exemplo:
 
 # 👨‍💻 Equipe de Desenvolvimento
 
-Projeto desenvolvido pelos alunos da **Academia do Programador**.
+Projeto desenvolvido pelos alunos **Thiago Kovalski e Davi Andrade da Academia do Programador**.
 
 ---
 
