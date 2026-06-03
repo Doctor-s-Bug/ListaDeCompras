@@ -41,6 +41,9 @@ public class CategoriaController : Controller
     [HttpPost]
     public ActionResult Cadastrar(CadastrarCategoriaViewModel c)
     {
+        if (!ModelState.IsValid)
+            return View(c);
+
         Categoria novaCategoria = new(
             c.Nome,
             c.Cor
@@ -92,6 +95,9 @@ public class CategoriaController : Controller
     [HttpPost]
     public ActionResult Editar(EditarCategoriaViewModel e)
     {
+        if (!ModelState.IsValid)
+            return View(e);
+
         Categoria categoriaAtualizada = new(
             e.Nome,
             e.Cor
