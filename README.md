@@ -1,112 +1,175 @@
-# Clube da Leitura
+# 🛒 Lista de Compras
 
-Gustavo tem uma coleção grande de revistas em quadrinhos. Por isso, resolveu
-emprestar para os amigos. Assim foi criado o Clube da Leitura.
+Sistema desenvolvido para auxiliar usuários no gerenciamento de compras domésticas, permitindo o cadastro de produtos, categorias, listas de compras e seus respectivos itens.
 
-Mas para não perder nenhuma revista, seu pai contratou os alunos da Academia do
-Programador para fazer uma aplicação que cadastra as revistas e controla os
-empréstimos.
+---
 
-## 1. Módulo de Caixas
+## 📖 Sobre o Projeto
 
-**Requisitos Funcionais:**
+Maria realiza as compras da família semanalmente, mas frequentemente esquece itens importantes ou acaba comprando produtos que já possui em casa.
 
-- O sistema deve permitir cadastrar novas caixas
-- O sistema deve permitir editar caixas existentes
-- O sistema deve permitir excluir caixas
-- O sistema deve permitir visualizar todas as caixas
+Para solucionar esse problema, foi desenvolvido o **Lista de Compras**, um sistema que permite organizar produtos em categorias, criar listas de compras e controlar os itens adquiridos, facilitando o planejamento e a gestão das compras.
 
-**Regras de Negócio:**
+---
 
-- Campos obrigatórios:
-- Etiqueta (texto único, máximo 50 caracteres)
-- Cor (seleção de paleta ou hexadecimal)
-- Dias de empréstimo (número, padrão 7)
-- Não pode haver etiquetas duplicadas
-- Não permitir excluir uma caixa caso tenha revistas vinculadas
-- Cada caixa define o prazo máximo para empréstimo de suas revistas
+# 🚀 Funcionalidades
 
-## 2. Módulo de Revistas
+## 📂 Módulo de Categorias
 
-**Requisitos Funcionais:**
+Permite organizar os produtos por categorias.
 
-- O sistema deve permitir cadastrar novas revistas
-- O sistema deve permitir editar revistas existentes
-- O sistema deve permitir excluir revistas
-- O sistema deve permitir visualizar todas as revistas
+### Funcionalidades
 
-**Regras de Negócio:**
+- ✅ Cadastrar categorias
+- ✅ Editar categorias
+- ✅ Excluir categorias
+- ✅ Visualizar categorias cadastradas
 
-- Campos obrigatórios:
-    - Título (2-100 caracteres)
-    - Número da edição (número positivo)
-    - Ano de publicação (data válida)
-    - Caixa (seleção obrigatória)
-- Não pode haver revistas com mesmo título e edição
+### Regras de Negócio
 
-## 3. Módulo de Amigos
+| Campo | Descrição                                |
+| ----- | ---------------------------------------- |
+| Nome  | Texto único com até 50 caracteres        |
+| Cor   | Seleção por paleta ou código hexadecimal |
 
-**Requisitos Funcionais**
+**Validações**
 
-- O sistema deve permitir a inserção de novos amigos
-- O sistema deve permitir a edição de amigos já cadastrados
-- O sistema deve permitir excluir amigos já cadastrados
-- O sistema deve permitir visualizar amigos cadastrados
+- Não pode existir mais de uma categoria com o mesmo nome.
+- Não é permitido excluir categorias que possuam produtos vinculados.
 
-**Regras de Negócio:**
+---
 
-- Campos obrigatórios:
-    - Nome (mínimo 3 caracteres, máximo 100)
-    - Nome do responsável (mínimo 3 caracteres, máximo 100)
-    - Telefone (formato validado: 10-11 dígitos)
-    - Não pode haver amigos com o mesmo nome e telefone
+## 🥫 Módulo de Produtos
 
-## 4. Módulo de Empréstimos
+Responsável pelo gerenciamento dos produtos disponíveis para compra.
 
-**Requisitos Funcionais:**
+### Funcionalidades
 
-- O sistema deve permitir registrar novos empréstimos
-- O sistema deve permitir registrar devoluções
-- O sistema deve permitir visualizar empréstimos abertos e fechados
+- ✅ Cadastrar produtos
+- ✅ Editar produtos
+- ✅ Excluir produtos
+- ✅ Visualizar produtos cadastrados
 
-**Refatorações:**
+### Regras de Negócio
 
-**Revistas:**
+| Campo             | Descrição                      |
+| ----------------- | ------------------------------ |
+| Nome              | Entre 2 e 100 caracteres       |
+| Categoria         | Seleção obrigatória            |
+| Unidade de Medida | Kg, Unidade, Litro, Caixa, etc |
+| Preço Aproximado  | Valor estimado do produto      |
 
-- O sistema deve armazenar e mostrar o status atual das revistas cadastradas (disponível/emprestada/reservada)
+**Validações**
 
-**Amigos:**
+- Não pode haver produtos com o mesmo nome dentro da mesma categoria.
 
-- O sistema deve permitir visualizar os empréstimos de amigos específicos
-- Não permitir excluir um amigo caso tenha empréstimos vinculados
-  Regras de Negócio:
-- Campos obrigatórios:
-    - Amigo
-    - Revista (disponível no momento)
-    - Data empréstimo (automática)
-    - Data devolução (calculada conforme caixa)
-- Status possíveis: Aberto / Concluído / Atrasado
-- Cada amigo só pode ter um empréstimo ativo por vez
-- Empréstimos atrasados devem ser destacados visualmente
-- A data de devolução é calculada automaticamente (data empréstimo + dias da
-  caixa)
+---
 
-## Como utilizar
+## 📝 Módulo de Listas de Compras
 
-1. Clone o repositório ou baixe o código fonte.
-2. Abra o terminal ou o prompt de comando e navegue até a pasta raiz
-3. Utilize o comando abaixo para restaurar as dependências do projeto.
+Permite criar e gerenciar listas de compras.
 
-    ```bash
-    dotnet restore
-    ```
+### Funcionalidades
 
-4. Para executar o projeto compilando em tempo real
+- ✅ Criar listas
+- ✅ Editar listas
+- ✅ Excluir listas
+- ✅ Visualizar listas cadastradas
 
-    ```bash
-    dotnet run --project ClubeDaLeituraWeb.WebApp
-    ```
+### Regras de Negócio
 
-## Requisitos
+| Campo           | Descrição                |
+| --------------- | ------------------------ |
+| Nome da Lista   | Entre 3 e 100 caracteres |
+| Data de Criação | Gerada automaticamente   |
+| Status          | Aberta ou Concluída      |
 
-- .NET 10.0 SDK
+**Validações**
+
+- Não permitir excluir listas que possuam itens vinculados.
+- Exibir quantidade total de itens da lista.
+- Exibir valor total estimado da compra.
+
+---
+
+## 🛍️ Módulo de Itens da Lista
+
+Gerencia os produtos adicionados às listas de compras.
+
+### Funcionalidades
+
+- ✅ Adicionar itens à lista
+- ✅ Remover itens da lista
+- ✅ Visualizar itens da lista
+- ✅ Exibir categoria do produto selecionado
+
+### Regras de Negócio
+
+| Campo      | Descrição           |
+| ---------- | ------------------- |
+| Produto    | Seleção obrigatória |
+| Quantidade | Número positivo     |
+
+**Validações**
+
+- Não permitir o mesmo produto duas vezes na mesma lista.
+- Calcular automaticamente o valor total da lista.
+
+### Fórmula de Cálculo
+
+```text
+Valor Total = Σ (Preço Aproximado × Quantidade)
+```
+
+---
+
+# 📊 Estrutura do Sistema
+
+```text
+Categorias
+    │
+    └── Produtos
+            │
+            └── Itens da Lista
+                    │
+                    └── Lista de Compras
+```
+
+---
+
+# 🎯 Objetivo
+
+O sistema tem como objetivo auxiliar no planejamento de compras, proporcionando:
+
+- Melhor organização dos produtos.
+- Redução de compras duplicadas.
+- Controle do valor estimado gasto.
+- Facilidade na criação e manutenção de listas de compras.
+
+---
+
+# 🏗️ Tecnologias Utilizadas
+
+> Adicione aqui as tecnologias utilizadas no desenvolvimento.
+
+Exemplo:
+
+- ASP.NET Core MVC
+- Entity Framework Core
+- SQL Server
+- Bootstrap
+- HTML5
+- CSS3
+- JavaScript
+
+---
+
+# 👨‍💻 Equipe de Desenvolvimento
+
+Projeto desenvolvido pelos alunos da **Academia do Programador**.
+
+---
+
+# 📄 Licença
+
+Este projeto possui fins educacionais e acadêmicos.
