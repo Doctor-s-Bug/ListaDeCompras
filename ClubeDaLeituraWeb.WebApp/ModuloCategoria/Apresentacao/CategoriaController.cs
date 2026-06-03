@@ -50,4 +50,30 @@ public class CategoriaController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+    public ActionResult Excluir(string Id)
+    {
+        Categoria? c = repositorioCategoria.SelecionarPorId(Id);
+
+        if (c == null)
+            return RedirectToAction(nameof(Listar));
+
+        ExcluirCategoriaViewModel excluirVm = new(
+            c.Id,
+            c.Nome,
+            c.Cor
+        );
+
+        return View(excluirVm);
+    }
+    [HttpPost]
+    public ActionResult Excluir(ExcluirCategoriaViewModel e)
+    {
+        Categoria? categoria = repositorioCategoria.SelecionarPorId(e.Id);
+
+        if (categoria != null)
+            repositorioCategoria.Excluir(e.Id);
+
+        return RedirectToAction(nameof(Listar));
+
+    }
 }
