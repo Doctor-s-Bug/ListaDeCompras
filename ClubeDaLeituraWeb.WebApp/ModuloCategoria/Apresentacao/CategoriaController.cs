@@ -41,6 +41,16 @@ public class CategoriaController : Controller
     [HttpPost]
     public ActionResult Cadastrar(CadastrarCategoriaViewModel c)
     {
+        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
+
+        foreach (Categoria item in categorias)
+        {
+            if (item.Nome.Equals(c.Nome, StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError("Nome", "Já Existe uma Categoria com esse Nome!");
+            }
+        }
+
         if (!ModelState.IsValid)
             return View(c);
 
@@ -95,6 +105,15 @@ public class CategoriaController : Controller
     [HttpPost]
     public ActionResult Editar(EditarCategoriaViewModel e)
     {
+        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
+        Categoria? c = repositorioCategoria.SelecionarPorId(e.Id);
+
+        foreach (Categoria item in categorias)
+        {
+            if (e.Id != item.Id && item.Nome.Equals(e.Nome, StringComparison.OrdinalIgnoreCase))
+                ModelState.AddModelError("Nome", "Já Existe uma Categoria com esse Nome!");
+        }
+
         if (!ModelState.IsValid)
             return View(e);
 
