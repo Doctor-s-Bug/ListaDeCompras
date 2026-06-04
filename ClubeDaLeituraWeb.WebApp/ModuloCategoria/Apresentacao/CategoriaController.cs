@@ -1,5 +1,6 @@
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Aplicacao;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using static ClubeDaLeituraWeb.WebApp.ModuloCategoria.Apresentacao.CategoriaViewModels;
 
@@ -41,25 +42,26 @@ public class CategoriaController : Controller
     [HttpPost]
     public ActionResult Cadastrar(CadastrarCategoriaViewModel c)
     {
-        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
-
-        foreach (Categoria item in categorias)
-        {
-            if (item.Nome.Equals(c.Nome, StringComparison.OrdinalIgnoreCase))
-            {
-                ModelState.AddModelError("Nome", "Já Existe uma Categoria com esse Nome!");
-            }
-        }
-
         if (!ModelState.IsValid)
             return View(c);
 
-        Categoria novaCategoria = new(
+        CadastrarCategoriaDto dto = new(
             c.Nome,
             c.Cor
         );
 
-        repositorioCategoria.Cadastrar(novaCategoria);
+        Result resultado = servicoCategoria.Cadastrar(dto);
+
+        if (resultado.IsFailed)
+        {
+            foreach (IError erro in resultado.Errors)
+            {
+                string campo = erro.Metadata["Campo"] is string ? erro.Metadata["Campo"].ToString()! : string.Empty;
+
+                ModelState.AddModelError(campo, erro.Message);
+            }
+            return View(c);
+        }
 
         return RedirectToAction(nameof(Listar));
     }

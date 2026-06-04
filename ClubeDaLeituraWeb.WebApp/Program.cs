@@ -21,7 +21,7 @@ builder.Services.AddScoped(provider =>
 
 builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixaEmArquivo>();
 builder.Services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
-builder.Services.AddScoped<ServicoCategoria>();
+builder.Services.AddScoped<ServicoCategoria>(); 
 #endregion
 
 #region Configuração do MVC
