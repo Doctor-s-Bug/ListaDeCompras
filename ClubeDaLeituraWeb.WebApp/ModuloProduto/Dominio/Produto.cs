@@ -34,6 +34,9 @@ public class Produto : EntidadeBase<Produto>
         if (PrecoAproximado == 0)
             erros.Add("O campo \"Preço Aproximado\" deve ser preenchido.");
 
+        if (Categoria == null)
+            erros.Add("O campo \"Categoria\" deve ser preenchido.");
+
         return erros;
     }
 
