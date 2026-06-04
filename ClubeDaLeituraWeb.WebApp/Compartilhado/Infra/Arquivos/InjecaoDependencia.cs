@@ -16,5 +16,6 @@ public static class InjecaoDependencia
             return contextoJson;
         });
         services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
+        services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
     }
 }
