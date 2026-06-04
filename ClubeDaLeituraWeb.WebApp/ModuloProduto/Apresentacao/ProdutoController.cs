@@ -1,6 +1,7 @@
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloProduto.Dominio;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using static ClubeDaLeituraWeb.WebApp.ModuloCategoria.Apresentacao.CategoriaViewModels;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloProduto.Apresentacao.Views;
@@ -41,12 +42,12 @@ public class ProdutoController : Controller
 
     public ActionResult Cadastrar()
     {
-        ViewBag.categoria = carregarCategoria();
+        ViewBag.Categoria = CarregarCategoria();
 
         return View();
     }
 
-    private List<MostrarCategoriaViewModel> carregarCategoria()
+    private List<MostrarCategoriaViewModel> CarregarCategoria()
     {
         List<Categoria> listaCategoria = repositorioCategoria.SelecionarTodos();
 

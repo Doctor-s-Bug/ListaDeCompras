@@ -28,9 +28,16 @@
                 <span asp-validation-for="PrecoAproximado" class="text-danger small fw-semibold"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Categoria" class="form-label"></label>
-                <select asp-for="Categoria" asp-items="" class="form-select">
-                    <option value="@Id">Selecione uma categoria</option>
+                <label asp-for="Categoria" class="form-label fw-semibold text-uppercase small mt-3 fs-4">Categoria</label>
+                <select asp-for="Categoria" class="form-control fs-5">
+
+                    <option value="">Selecione uma categoria</option>
+                    @foreach (MostrarCategoriaViewModel categoria in categorias)
+                    {
+                        <option value="@categoria.Id">
+                            @categoria.Nome
+                        </option>
+                    }
                 </select>
             </div>
             <div class="d-flex justify-content-end gap-2 mt-4">
