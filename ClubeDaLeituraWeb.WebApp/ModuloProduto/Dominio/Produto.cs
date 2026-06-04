@@ -7,7 +7,12 @@ public class Produto : EntidadeBase<Produto>
     public string UnidadeMedida { get; private set; }
     public decimal PrecoAproximado { get; private set; }
     public Categoria Categoria { get; private set; }
-
+    
+    public Produto()
+    {
+        
+    }
+    
     public Produto(
         string nome,
         string unidadeMedida,
