@@ -34,4 +34,9 @@ public class ProdutoController : Controller
 
         return View(listarVm);
     }
+
+    public ActionResult Cadastrar()
+    {
+        return View();
+    }
 }

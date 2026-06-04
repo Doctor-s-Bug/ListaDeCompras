@@ -8,3 +8,10 @@ public record ListarProdutosViewModel(
     string Categoria
 );
 
+public record CadastrarProdutosViewModel(
+    string Nome,
+    string UnidadeMedida,
+    decimal PrecoAproximado,
+    string Categoria
+);
+
