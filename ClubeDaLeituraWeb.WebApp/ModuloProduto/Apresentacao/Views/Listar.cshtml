@@ -35,9 +35,15 @@
                                     <strong>ID:</strong> @item.Id
                                 </p>
                             </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">R$@item.PrecoAproximado.ToString("F2")</h5>
+                                <p class="card-text mb-2">
+                                    <strong>Unidade: @item.UnidadeMedida</strong>
+                                </p>
+                            </div>
                             <div class="d-flex align-items-center">
-                                <strong class="me-2">Unidade de Medida:</strong>
-                                <span class="ms-2">@item.UnidadeMedida</span>
+                                <strong class="me-2">Categoria:</strong>
+                                <span class="ms-2">@item.Categoria</span>
                             </div>
                             <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3 p-2" asp-action="Editar"
                                asp-route-id="@item.Id">Editar</a>
