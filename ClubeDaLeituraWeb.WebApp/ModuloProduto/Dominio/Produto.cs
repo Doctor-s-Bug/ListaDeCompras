@@ -3,16 +3,16 @@ using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 
 public class Produto : EntidadeBase<Produto>
 {
-    public string Nome { get; private set; }
-    public string UnidadeMedida { get; private set; }
-    public decimal PrecoAproximado { get; private set; }
-    public Categoria Categoria { get; private set; }
-    
+    public string Nome { get; set; }
+    public string UnidadeMedida { get; set; }
+    public decimal PrecoAproximado { get; set; }
+    public Categoria Categoria { get; set; }
+
     public Produto()
     {
-        
+
     }
-    
+
     public Produto(
         string nome,
         string unidadeMedida,
