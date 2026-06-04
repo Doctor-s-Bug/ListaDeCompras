@@ -3,6 +3,7 @@
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastrar Produto";
+    List<MostrarCategoriaViewModel> categorias = ViewBag.Categoria;
 }
 @model CadastrarProdutosViewModel;
 
@@ -25,6 +26,12 @@
                 </label>
                 <input asp-for="PrecoAproximado" type="number" class="form-control fs-5">
                 <span asp-validation-for="PrecoAproximado" class="text-danger small fw-semibold"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Categoria" class="form-label"></label>
+                <select asp-for="Categoria" asp-items="" class="form-select">
+                    <option value="@Id">Selecione uma categoria</option>
+                </select>
             </div>
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>

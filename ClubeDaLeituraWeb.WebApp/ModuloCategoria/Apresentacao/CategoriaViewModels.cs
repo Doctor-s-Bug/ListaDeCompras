@@ -30,4 +30,5 @@ public class CategoriaViewModels
         [Required(ErrorMessage = "O campo \"Cor\" é obrigatório!")]
         CorCategoria Cor
     );
+    public record MostrarCategoriaViewModel(string Id, string Nome);
 }
