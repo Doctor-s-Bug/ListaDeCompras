@@ -1,3 +1,4 @@
+using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Apresentacao;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Aplicacao;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 using FluentResults;
@@ -20,20 +21,12 @@ public class CategoriaController : Controller
     [HttpGet]
     public ActionResult Listar()
     {
-        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
-
-        List<ListarCategoriaViewModel> listarVm = new();
-
-        foreach (Categoria categoria in categorias)
-        {
-            ListarCategoriaViewModel vm = new(
-                categoria.Id,
-                categoria.Nome,
-                categoria.Cor
-            );
-            listarVm.Add(vm);
-        }
-        return View(listarVm);
+        List<ListarCategoriaDto> dtos = servicoCategoria.SelecionarTodos();
+        List<ListarCategoriaViewModel> listarVms = dtos.Select(
+            e => new ListarCategoriaViewModel(e.Id, e.Nome, e.Cor))
+            .ToList();
+            
+        return View(listarVms);
     }
     public ActionResult Cadastrar()
     {
@@ -93,15 +86,23 @@ public class CategoriaController : Controller
     }
     public ActionResult Editar(string id)
     {
-        Categoria? categoria = repositorioCategoria.SelecionarPorId(id);
+        //capta o resultado do servico se foi possivel selecionar por ID
+        Result<DetalheCategoriaDto> resultado = servicoCategoria.SelecionarPorId(id);
 
-        if (categoria == null)
+        if (resultado.IsFailed)
+        {
+            //caso não pega a mensagem de erro dentro do atributo Erros do objeto RESULT e joga pro tempData
+            TempData["MensagemErro"] = resultado.Errors.First().Message;
             return RedirectToAction(nameof(Listar));
+        }
+
+        //Aqui sabemos que a conversao deu certo, entao podemos extrair essa variavel
+        DetalheCategoriaDto dto = resultado.Value;
 
         EditarCategoriaViewModel editarVm = new(
             id,
-            categoria.Nome,
-            categoria.Cor
+            dto.Nome,
+            dto.Cor
         );
         return View(editarVm);
     }

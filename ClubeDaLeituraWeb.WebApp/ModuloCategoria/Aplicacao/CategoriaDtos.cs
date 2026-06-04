@@ -16,7 +16,7 @@ public record EditarCategoriaDto(
     string Nome,
     CorCategoria Cor
 );
-public record ExcluirCategoriaDto(
+public record DetalheCategoriaDto(
         string Id,
         string Nome,
         CorCategoria Cor

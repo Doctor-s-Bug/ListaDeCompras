@@ -1,6 +1,6 @@
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 using FluentResults;
-
+using Microsoft.AspNetCore.Http.HttpResults;
 namespace ClubeDaLeituraWeb.WebApp.ModuloCategoria.Aplicacao;
 
 public class ServicoCategoria
@@ -51,6 +51,21 @@ public class ServicoCategoria
         repositorioCategoria.Excluir(Id);
 
         return Result.Ok();
+    }
+    public List<ListarCategoriaDto> SelecionarTodos()
+    {
+        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
+
+        return categorias.Select(e => new ListarCategoriaDto(e.Id, e.Nome, e.Cor)).ToList();
+    }
+    public Result<DetalheCategoriaDto> SelecionarPorId(string id)
+    {
+        Categoria? categoria = repositorioCategoria.SelecionarPorId(id);
+
+        if (categoria == null)
+            return Result.Fail("Categoria Não Encontrada");
+
+        return Result.Ok(new DetalheCategoriaDto(categoria.Id, categoria.Nome, categoria.Cor));
     }
     private bool ExisteCategoriaComNome(string nome, string? idIgnorado = null)
     {
