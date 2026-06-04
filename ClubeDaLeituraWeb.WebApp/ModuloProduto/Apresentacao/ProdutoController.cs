@@ -26,12 +26,12 @@ public class ProdutoController : Controller
         foreach (Produto p in ListaProdutos)
         {
             ListarProdutosViewModel vm = new(
-        p.Id,
-        p.Nome,
-        p.UnidadeMedida,
-        p.PrecoAproximado,
-        p.Categoria.Nome
-        );
+                p.Id,
+                p.Nome,
+                p.UnidadeMedida,
+                p.PrecoAproximado,
+                p.Categoria.Nome
+            );
 
             listarVm.Add(vm);
 
@@ -45,6 +45,17 @@ public class ProdutoController : Controller
         ViewBag.Categoria = CarregarCategoria();
 
         return View();
+    }
+
+    [HttpPost]
+
+    public ActionResult Cadastrar(CadastrarProdutosViewModel vm)
+    {
+        Categoria? categoriaSelecionada = repositorioCategoria.SelecionarPorId(vm.Categoria);
+        Produto novoProduto = new(vm.Nome, vm.UnidadeMedida, vm.PrecoAproximado, categoriaSelecionada);
+        repositorioProduto.Cadastrar(novoProduto);
+
+        return RedirectToAction(nameof(Listar));
     }
 
     private List<MostrarCategoriaViewModel> CarregarCategoria()
