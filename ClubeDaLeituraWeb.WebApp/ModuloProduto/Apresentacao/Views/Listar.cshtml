@@ -1,7 +1,9 @@
+@using ClubeDaLeituraWeb.WebApp.ModuloProduto.Apresentacao
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Listagem de Produtos";
 }
+@model List<ListarProdutosViewModel>
 
 <body>
     <a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
@@ -13,7 +15,7 @@
         </div>
     }
 
-    @if (true)
+    @if (@Model.Count == 0)
     {
         <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
             Nenhuma Categoria Cadastrada.
@@ -22,7 +24,7 @@
     else
     {
         <div class="row g-3">
-            @* @foreach (var item in Model)
+            @foreach (var item in Model)
             {
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm h-100">
@@ -34,8 +36,8 @@
                                 </p>
                             </div>
                             <div class="d-flex align-items-center">
-                                <strong class="me-2">Cor:</strong>
-                                <span class="ms-2">@item.Cor</span>
+                                <strong class="me-2">Unidade de Medida:</strong>
+                                <span class="ms-2">@item.UnidadeMedida</span>
                             </div>
                             <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3 p-2" asp-action="Editar"
                                asp-route-id="@item.Id">Editar</a>
@@ -44,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-            } *@
+            }
         </div>
     }
 </body>
