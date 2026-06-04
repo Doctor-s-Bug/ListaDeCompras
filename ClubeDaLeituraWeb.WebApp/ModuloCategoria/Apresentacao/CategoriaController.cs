@@ -40,14 +40,14 @@ public class CategoriaController : Controller
         return View();
     }
     [HttpPost]
-    public ActionResult Cadastrar(CadastrarCategoriaViewModel c)
+    public ActionResult Cadastrar(CadastrarCategoriaViewModel cadastrarVm)
     {
         if (!ModelState.IsValid)
-            return View(c);
+            return View(cadastrarVm);
 
         CadastrarCategoriaDto dto = new(
-            c.Nome,
-            c.Cor
+            cadastrarVm.Nome,
+            cadastrarVm.Cor
         );
 
         Result resultado = servicoCategoria.Cadastrar(dto);
@@ -60,7 +60,7 @@ public class CategoriaController : Controller
 
                 ModelState.AddModelError(campo, erro.Message);
             }
-            return View(c);
+            return View(cadastrarVm);
         }
 
         return RedirectToAction(nameof(Listar));
@@ -81,13 +81,14 @@ public class CategoriaController : Controller
         return View(excluirVm);
     }
     [HttpPost]
-    public ActionResult Excluir(ExcluirCategoriaViewModel e)
+    public ActionResult Excluir(ExcluirCategoriaViewModel e) //aula 64 - nao poder excluir categorias vinculadas a produto - 1,55seg
     {
-        Categoria? categoria = repositorioCategoria.SelecionarPorId(e.Id);
+        Result resultado = servicoCategoria.Excluir(e.Id);
 
-        if (categoria != null)
-            repositorioCategoria.Excluir(e.Id);
-
+        if (resultado.IsFailed)
+        {
+            TempData["MensagemErro"] = resultado.Errors.First().Message;
+        }
         return RedirectToAction(nameof(Listar));
     }
     public ActionResult Editar(string id)
@@ -105,25 +106,24 @@ public class CategoriaController : Controller
         return View(editarVm);
     }
     [HttpPost]
-    public ActionResult Editar(EditarCategoriaViewModel e)
+    public ActionResult Editar(EditarCategoriaViewModel editarVm)
     {
-        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
-        Categoria? c = repositorioCategoria.SelecionarPorId(e.Id);
-
-        foreach (Categoria item in categorias)
-        {
-            if (e.Id != item.Id && item.Nome.Equals(e.Nome, StringComparison.OrdinalIgnoreCase))
-                ModelState.AddModelError("Nome", "Já Existe uma Categoria com esse Nome!");
-        }
-
         if (!ModelState.IsValid)
-            return View(e);
+            return View(editarVm);
 
-        Categoria categoriaAtualizada = new(
-            e.Nome,
-            e.Cor
-        );
-        repositorioCategoria.Editar(e.Id, categoriaAtualizada);
+        Result resultado = servicoCategoria.Editar(new EditarCategoriaDto(editarVm.Id, editarVm.Nome, editarVm.Cor));
+
+        if (resultado.IsFailed)
+        {
+            foreach (IError erro in resultado.Errors)
+            {
+                string campo = erro.Metadata["Campo"] is string ? erro.Metadata["Campo"].ToString()! : string.Empty;
+
+                ModelState.AddModelError(campo, erro.Message);
+            }
+
+            return View(editarVm);
+        }
 
         return RedirectToAction(nameof(Listar));
     }
