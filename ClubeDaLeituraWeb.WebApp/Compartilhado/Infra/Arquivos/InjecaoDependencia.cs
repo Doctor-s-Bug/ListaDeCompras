@@ -1,5 +1,3 @@
-using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Dominio;
-using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Infra;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Infra;
 
@@ -17,7 +15,6 @@ public static class InjecaoDependencia
 
             return contextoJson;
         });
-        services.AddScoped<IRepositorioCaixa, RepositorioCaixaEmArquivo>();
         services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
     }
 }

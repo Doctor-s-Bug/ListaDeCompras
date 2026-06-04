@@ -1,4 +1,3 @@
-using ClubeDaLeituraWeb.WebApp.ModuloCaixa.Apresentacao;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Aplicacao;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 using FluentResults;
@@ -25,7 +24,7 @@ public class CategoriaController : Controller
         List<ListarCategoriaViewModel> listarVms = dtos.Select(
             e => new ListarCategoriaViewModel(e.Id, e.Nome, e.Cor))
             .ToList();
-            
+
         return View(listarVms);
     }
     public ActionResult Cadastrar()
