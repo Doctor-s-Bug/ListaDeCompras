@@ -1,9 +1,10 @@
 @using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio
+@using ClubeDaLeituraWeb.WebApp.ModuloProduto.Apresentacao
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastrar Produto";
 }
-@model CadastrarCategoriaViewModel;
+@model CadastrarProdutosViewModel;
 
 <body>
     <form class="card border border-secondary  shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Cadastrar"
@@ -13,21 +14,21 @@
             <input asp-for="Nome" type="text" class="form-control fs-5">
             <span asp-validation-for="Nome" class="text-danger small fw-semibold"></span>
         </div>
-        <div class="mb-3">
-            <label asp-for="Cor" class="form-label fw-semibold text-uppercase small mt-3 fs-5">Cor
-                Categoria</label>
-                <div>
-                    <select asp-for="Cor" value="" class="form-select fs-4">
-                        <option href="#">@CorCategoria.Branco.ToString()</option>
-                        <option href="#">@CorCategoria.Azul.ToString()</option>
-                        <option href="#">@CorCategoria.Verde.ToString()</option>
-                        <option href="#">@CorCategoria.Vermelho.ToString()</option>
-                    </select>
-                    <span asp-validation-for="Cor" class="text-danger small fw-semibold"></span>
-                </div>
-                <div class="d-flex justify-content-end gap-2 mt-4">
-                    <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
-                    <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
-                </div>
-            </form>
-        </body>
+        <div class="">
+            <label asp-for="UnidadeMedida" class="form-label fw-semibold text-uppercase small mt-3 fs-4">Unidade de
+                Medida</label>
+                <input asp-for="UnidadeMedida" type="text" class="form-control fs-5">
+                <span asp-validation-for="UnidadeMedida" class="text-danger small fw-semibold"></span>
+            </div>
+            <div class="">
+                <label asp-for="PrecoAproximado" class="form-label fw-semibold text-uppercase small mt-3 fs-4">Preço
+                </label>
+                <input asp-for="PrecoAproximado" type="number" class="form-control fs-5">
+                <span asp-validation-for="PrecoAproximado" class="text-danger small fw-semibold"></span>
+            </div>
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+                <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+            </div>
+        </form>
+    </body>
