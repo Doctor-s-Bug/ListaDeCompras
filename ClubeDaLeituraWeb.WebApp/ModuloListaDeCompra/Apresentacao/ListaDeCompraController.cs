@@ -60,4 +60,28 @@ public class ListaDeCompraController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+    public ActionResult Editar(string id)
+    {
+        ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(id);
+
+        if (listaDeCompra == null)
+            return RedirectToAction(nameof(Listar));
+
+        EditarListaViewModel vmEditar = mapeador.Map<EditarListaViewModel>(listaDeCompra);
+
+        return View(vmEditar);
+    }
+    [HttpPost]
+    public ActionResult Editar(EditarListaViewModel vmEditar)
+    {
+        ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(vmEditar.Id);
+
+        if (listaDeCompra != null)
+        {
+            ListaDeCompra listaEditada = mapeador.Map<ListaDeCompra>(vmEditar);
+            repositorioListaDeCompra.Editar(vmEditar.Id, listaEditada);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
 }

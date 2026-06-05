@@ -17,3 +17,9 @@ public record ExcluirListaViewModel(
     string DataCriacao,
     StatusLista StatusLista
 );
+public record EditarListaViewModel(
+    string Id,
+    string Nome,
+    string DataCriacao,
+    StatusLista StatusLista
+);

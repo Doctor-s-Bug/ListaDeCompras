@@ -15,5 +15,10 @@ public class ListaProfile : Profile
         nameof(ListaDeCompra.DataCriacao),
         opt => opt.MapFrom(src => src.DataCriacao.ToString("dd/MM/yyyy"))
         );
+        CreateMap<ListaDeCompra, EditarListaViewModel>().ForCtorParam(
+        nameof(ListaDeCompra.DataCriacao),
+        opt => opt.MapFrom(src => src.DataCriacao.ToString("dd/MM/yyyy"))
+        );
+        CreateMap<EditarListaViewModel, ListaDeCompra>();
     }
 }
