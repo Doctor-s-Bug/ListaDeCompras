@@ -39,4 +39,12 @@ public class ListaDeCompraController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+    public ActionResult Excluir(string id)
+    {
+        ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(id);
+
+        ExcluirListaViewModel excluirVm = mapeador.Map<ExcluirListaViewModel>(listaDeCompra);
+
+        return View(excluirVm);
+    }
 }

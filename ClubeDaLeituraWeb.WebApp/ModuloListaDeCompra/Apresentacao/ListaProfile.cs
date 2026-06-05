@@ -11,5 +11,9 @@ public class ListaProfile : Profile
         nameof(ListaDeCompra.DataCriacao),
         opt => opt.MapFrom(src => src.DataCriacao.ToString("dd/MM/yyyy")) //aq peguei do chat kkkk
     ); ;
+        CreateMap<ListaDeCompra, ExcluirListaViewModel>().ForCtorParam(
+        nameof(ListaDeCompra.DataCriacao),
+        opt => opt.MapFrom(src => src.DataCriacao.ToString("dd/MM/yyyy"))
+        );
     }
 }

@@ -11,3 +11,9 @@ public record ListarListasViewModel(
 public record CadastrarListaViewModel(
     string Nome
 );
+public record ExcluirListaViewModel(
+    string Id,
+    string Nome,
+    string DataCriacao,
+    StatusLista StatusLista
+);
