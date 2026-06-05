@@ -26,4 +26,17 @@ public class ListaDeCompraController : Controller
 
         return View(listarVms);
     }
+    public ActionResult Cadastrar()
+    {
+        return View();
+    }
+    [HttpPost]
+    public ActionResult Cadastrar(CadastrarListaViewModel cadastroVm)
+    {
+        ListaDeCompra listaDeCompra = new(cadastroVm.Nome);
+
+        repositorioListaDeCompra.Cadastrar(listaDeCompra);
+
+        return RedirectToAction(nameof(Listar));
+    }
 }

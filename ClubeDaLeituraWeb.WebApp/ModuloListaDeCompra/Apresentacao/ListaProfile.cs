@@ -7,6 +7,6 @@ public class ListaProfile : Profile
 {
     public ListaProfile()
     {
-        CreateMap<ListarListasViewModel, ListaDeCompra>();
+        CreateMap<ListaDeCompra, ListarListasViewModel>();
     }
 }

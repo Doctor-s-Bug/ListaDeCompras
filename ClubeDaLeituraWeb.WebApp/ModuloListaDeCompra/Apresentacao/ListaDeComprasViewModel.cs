@@ -8,3 +8,6 @@ public record ListarListasViewModel(
     string DataCriacao,
     StatusLista StatusLista
 );
+public record CadastrarListaViewModel(
+    string Nome
+);
