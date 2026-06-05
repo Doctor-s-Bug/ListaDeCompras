@@ -22,3 +22,11 @@ public record ExcluirProdutosViewModel(
     decimal PrecoAproximado,
     string Categoria
 );
+
+public record EditarProdutosViewModel(
+    string Id,
+    string Nome,
+    string UnidadeMedida,
+    decimal PrecoAproximado,
+    string Categoria
+);

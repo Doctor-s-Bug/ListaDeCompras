@@ -95,4 +95,12 @@ public class ProdutoController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+
+    public ActionResult Editar(string Id)
+    {
+        ViewBag.Categoria = CarregarCategoria();
+        Produto? produto = repositorioProduto.SelecionarPorId(Id);
+        EditarProdutosViewModel editarVm = new(Id, produto.Nome, produto.UnidadeMedida, produto.PrecoAproximado, produto.Categoria.Nome);
+        return View(editarVm);
+    }
 }
