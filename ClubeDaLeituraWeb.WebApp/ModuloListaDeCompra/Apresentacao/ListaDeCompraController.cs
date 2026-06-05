@@ -24,6 +24,6 @@ public class ListaDeCompraController : Controller
 
         List<ListarListasViewModel> listarVms = mapeador.Map<List<ListarListasViewModel>>(listaDeCompras);
 
-        return View();
+        return View(listarVms);
     }
 }
