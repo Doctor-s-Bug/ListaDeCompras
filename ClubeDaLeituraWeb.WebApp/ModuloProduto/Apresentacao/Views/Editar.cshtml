@@ -30,12 +30,18 @@
                 <label asp-for="Categoria" class="form-label fw-semibold text-uppercase small mt-3 fs-4">Categoria</label>
                 <select asp-for="Categoria" class="form-control fs-5">
 
-                    <option value="">Selecione uma categoria</option>
                     @foreach (MostrarCategoriaViewModel categoria in categorias)
                     {
-                        <option value="@categoria.Id">
-                            @categoria.Nome
-                        </option>
+                        @if (categoria.Id == Model.Categoria)
+                        {
+                            <option value="@categoria.Id" selected>@categoria.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@categoria.Id">
+                                @categoria.Nome
+                            </option>
+                        }
                     }
                 </select>
             </div>
