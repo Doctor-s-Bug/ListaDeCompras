@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloProduto.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
@@ -9,6 +10,7 @@ public sealed class ContextoJson
 {
     public List<Categoria> Categorias { get; set; } = new List<Categoria>();
     public List<Produto> Produtos { get; set; } = new List<Produto>();
+    public List<ListaDeCompra> ListasDeCompra { get; set; } = new List<ListaDeCompra>();
 
     private readonly string caminhoArquivo;
 
@@ -55,5 +57,6 @@ public sealed class ContextoJson
 
         Categorias = contextoSalvo.Categorias;
         Produtos = contextoSalvo.Produtos;
+        ListasDeCompra = contextoSalvo.ListasDeCompra;
     }
 }
