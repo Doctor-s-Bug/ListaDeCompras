@@ -1,0 +1,49 @@
+@using ClubeDaLeituraWeb.WebApp.ModuloProduto.Apresentacao
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Excluir Produto";
+}
+@model ExcluirProdutosViewModel;
+
+<form class="card border border-secondary  shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Excluir"
+      method="post">
+    <div class="card shadow-sm h-100">
+        <div class="card-body">
+
+            <div class="d-flex flex-column mt-3">
+                <strong class="me-2 mb-1 fs-4">Id:</strong>
+                <span class="form-control fs-5">@Model.Id</span>
+            </div>
+
+            <div class="d-flex flex-column mt-3">
+                <strong class="me-2 mb-1 fs-4">Nome:</strong>
+                <span class="form-control fs-5">@Model.Nome</span>
+            </div>
+
+            <div class="d-flex flex-column mt-3">
+                <strong class="me-2 mb-1 fs-4">Unidade de Medida:</strong>
+                <span class="form-control fs-5">@Model.UnidadeMedida</span>
+            </div>
+
+            <div class="d-flex flex-column mt-3">
+                <strong class="me-2 mb-1 fs-4">Preço:</strong>
+                <span class="form-control fs-5">R$@Model.PrecoAproximado</span>
+            </div>
+
+            <div class="d-flex flex-column mt-3">
+                <strong class="me-2 mb-1 fs-4">Produto:</strong>
+                <span class="form-control fs-5">@Model.Categoria</span>
+            </div>
+
+            <div class="alert alert-danger mt-4" role="alert ">
+                Deseja Excluir Esse Registro?
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+                <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+            </div>
+
+        </div>
+    </div>
+</form>
