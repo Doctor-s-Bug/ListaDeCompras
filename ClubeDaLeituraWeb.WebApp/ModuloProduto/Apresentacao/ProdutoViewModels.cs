@@ -15,3 +15,10 @@ public record CadastrarProdutosViewModel(
     string Categoria
 );
 
+public record ExcluirProdutosViewModel(
+    string Id,
+    string Nome,
+    string UnidadeMedida,
+    decimal PrecoAproximado,
+    string Categoria
+);
