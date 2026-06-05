@@ -82,4 +82,17 @@ public class ProdutoController : Controller
         ExcluirProdutosViewModel excluirVm = new(Id, produto.Nome, produto.UnidadeMedida, produto.PrecoAproximado, produto.Categoria.Nome);
         return View(excluirVm);
     }
+
+    [HttpPost]
+
+    public ActionResult Excluir(ExcluirProdutosViewModel excluirVm)
+    {
+        Produto? produto = repositorioProduto.SelecionarPorId(excluirVm.Id);
+        if (produto != null)
+        {
+            repositorioProduto.Excluir(excluirVm.Id);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
 }
