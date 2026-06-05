@@ -103,4 +103,15 @@ public class ProdutoController : Controller
         EditarProdutosViewModel editarVm = new(Id, produto.Nome, produto.UnidadeMedida, produto.PrecoAproximado, produto.Categoria.Nome);
         return View(editarVm);
     }
+
+    [HttpPost]
+
+    public ActionResult Editar(EditarProdutosViewModel editarVm)
+    {
+        Categoria? categoriaSelecionada = repositorioCategoria.SelecionarPorId(editarVm.Categoria);
+        Produto produtoEditado = new(editarVm.Nome, editarVm.UnidadeMedida, editarVm.PrecoAproximado, categoriaSelecionada);
+        repositorioProduto.Editar(editarVm.Id, produtoEditado);
+
+        return RedirectToAction(nameof(Listar));
+    }
 }
