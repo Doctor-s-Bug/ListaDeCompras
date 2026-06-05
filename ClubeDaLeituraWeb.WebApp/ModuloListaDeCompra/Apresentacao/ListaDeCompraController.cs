@@ -43,8 +43,21 @@ public class ListaDeCompraController : Controller
     {
         ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(id);
 
+        if (listaDeCompra == null)
+            return RedirectToAction(nameof(Listar));
+
         ExcluirListaViewModel excluirVm = mapeador.Map<ExcluirListaViewModel>(listaDeCompra);
 
         return View(excluirVm);
+    }
+    [HttpPost]
+    public ActionResult Excluir(ExcluirListaViewModel excluirVm)
+    {
+        ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(excluirVm.Id);
+
+        if (listaDeCompra != null)
+            repositorioListaDeCompra.Excluir(excluirVm.Id);
+
+        return RedirectToAction(nameof(Listar));
     }
 }
