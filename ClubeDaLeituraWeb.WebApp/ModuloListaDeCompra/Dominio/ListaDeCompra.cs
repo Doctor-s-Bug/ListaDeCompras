@@ -1,4 +1,5 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloItensProduto.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
 
@@ -7,16 +8,32 @@ public class ListaDeCompra : EntidadeBase<ListaDeCompra>
     public string Nome { get; set; }
     public DateTime DataCriacao { get; set; } = DateTime.Today;
     public StatusLista StatusLista { get; set; } = StatusLista.Aberta;
-    
+    public List<ItensProduto> ListaProdutos { get; set; } = new();
+    public decimal ValorTotal
+    {
+        get
+        {
+            decimal total = 0;
+
+            foreach (ItensProduto item in ListaProdutos)
+            {
+                decimal precoProduto = item.Produto.PrecoAproximado;
+                decimal Quantidade = item.QuantidadeProduto;
+
+                total += precoProduto * Quantidade;
+            }
+            return total;
+        }
+    }
+
     public ListaDeCompra()
     {
-
     }
     public ListaDeCompra(string nome)
     {
         Nome = nome;
     }
-    
+
     public override List<string> Validar()
     {
         List<string> erros = [];

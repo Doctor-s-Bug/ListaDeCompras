@@ -84,4 +84,15 @@ public class ListaDeCompraController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+    public ActionResult MostrarLista(string id)
+    {
+        ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(id);
+
+        if (listaDeCompra == null)
+            return RedirectToAction(nameof(Listar));
+
+        ListarListasViewModel listarVm = mapeador.Map<ListarListasViewModel>(listaDeCompra);
+
+        return View(listarVm);
+    }
 }
