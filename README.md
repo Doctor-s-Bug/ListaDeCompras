@@ -6,7 +6,7 @@ Sistema desenvolvido para auxiliar usuários no gerenciamento de compras domést
 
 # 🤳 Demonstração
 
-![Demonstração do sistema](Midia\ApresentacaoMobile.gif)
+![Demonstração do sistema](Midia/ApresentacaoMobile.gif)
 
 ## 📖 Sobre o Projeto
 
