@@ -1,6 +1,9 @@
 using AutoMapper;
+using ClubeDaLeituraWeb.WebApp.ModuloItensProduto.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Aplicacao;
 using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloProduto.Apresentacao;
+using ClubeDaLeituraWeb.WebApp.ModuloProduto.Dominio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Apresentacao;
@@ -8,14 +11,16 @@ namespace ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Apresentacao;
 public class ListaDeCompraController : Controller
 {
     private readonly IRepositorioListaDeCompra repositorioListaDeCompra;
+    private readonly IRepositorioProduto repositorioProduto;
     private readonly ServicoLista servicoLista;
     private readonly IMapper mapeador;
 
-    public ListaDeCompraController(ServicoLista servicoLista, IRepositorioListaDeCompra repositorioListaDeCompra, IMapper mapeador)
+    public ListaDeCompraController(ServicoLista servicoLista, IRepositorioListaDeCompra repositorioListaDeCompra, IMapper mapeador, IRepositorioProduto repositorioProduto)
     {
         this.servicoLista = servicoLista;
         this.repositorioListaDeCompra = repositorioListaDeCompra;
         this.mapeador = mapeador;
+        this.repositorioProduto = repositorioProduto;
     }
 
     public ActionResult Listar()
@@ -91,8 +96,30 @@ public class ListaDeCompraController : Controller
         if (listaDeCompra == null)
             return RedirectToAction(nameof(Listar));
 
-        ListarListasViewModel listarVm = mapeador.Map<ListarListasViewModel>(listaDeCompra);
+        List<ListarProdutoViewModel> produtosVm = mapeador.Map<List<ListarProdutoViewModel>>(listaDeCompra.ListaProdutos);
+
+        ListarListasViewModel listarVm = new(listaDeCompra.Id, listaDeCompra.Nome, listaDeCompra.StatusLista, produtosVm, listaDeCompra.ValorTotal, listaDeCompra.DataCriacao.ToString("dd/MM/yyyy"));
 
         return View(listarVm);
+    }
+    public ActionResult Adicionar(string id)
+    {
+        ListaDeCompra? listaSelecionada = repositorioListaDeCompra.SelecionarPorId(id);
+
+        List<ListarProdutoViewModel> itensProdutoProfile = [];
+
+        ListarProdutoViewModel listaVm = mapeador.Map<ListarProdutoViewModel>(listaSelecionada);
+
+        ViewBag.Produtos = CarregarProdutos();
+
+        return View();
+    }
+    public List<ListarProdutosViewModel> CarregarProdutos()
+    {
+        List<Produto> produtos = repositorioProduto.SelecionarTodos();
+
+        List<ListarProdutosViewModel> listarVm = mapeador.Map<List<ListarProdutosViewModel>>(produtos);
+
+        return listarVm;
     }
 }

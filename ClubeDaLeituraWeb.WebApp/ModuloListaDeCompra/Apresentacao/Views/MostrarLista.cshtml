@@ -4,7 +4,7 @@
 }
 @model ListarListasViewModel;
 
-<form class="card border border-secondary  shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Editar"
+<form class="card border border-secondary  shadow-sm mx-auto p-4" style="max-width: 750px;" asp-action="Editar"
       method="post">
     <div class="card shadow-sm h-100">
         <div class="card-body">
@@ -15,7 +15,7 @@
             </div>
             <div class="d-flex justify-content-between align-items-center fs-5">
                 <p class="card-text mb-2">
-                    <strong>Valor Total:</strong> R$200.00
+                    <strong>Valor Total: @Model.ValorTotal</strong>
                 </p>
                 <p class="card-text mb-2">
                     <strong>Status:</strong> @Model.StatusLista
@@ -29,34 +29,33 @@
                             <th>Produto</th>
                             <th>Categoria</th>
                             <th>Quantidade</th>
+                            <th>Preço</th>
                         </tr>
                     </thead>
 
                     <tbody>
 
-                        @* @foreach (ListarAmigoViewModel c in Model)
-                {
-                    <tr>
-                        <td>@c.Id</td>
-                        <td>@c.Nome</td>
-                        <td>@c.NomeResponsavel</td>
-                        <td>@c.Telefone</td>
-                        <td>
-                            <div class="d-flex gap-2">
-                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
-                                   asp-route-id="@c.Id">Editar</a>
-                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
-                                   asp-route-id="@c.Id">Excluir</a>
-                            </div>
-                        </td>
-                    </tr>
-                } *@
+                        @foreach (ListarProdutoViewModel c in Model.Produtos)
+                        {
+                            <tr>
+                                <td>@c.ProdutoNome</td>
+                                <td>@c.Categoria</td>
+                                <td>@c.Quantidade</td>
+                                <td>@c.Preco</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn-close" disabled aria-label="Close bg-red"
+                                                asp-route-idProduto="@c.Id"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
 
                 <div class="d-flex justify-content-between align-items-center fs-3">
 
-                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3 p-2" asp-action="///"
+                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3 p-2" asp-action="Adicionar"
                        asp-route-id="@Model.Id">Adicionar Produto</a>
                 </div>
 

@@ -1,5 +1,7 @@
+using ClubeDaLeituraWeb.WebApp.ModuloItensProduto.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Apresentacao;
 using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloProduto.Apresentacao;
 
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Apresentacao;
 
@@ -22,6 +24,14 @@ public static class InjecaoDependencia
         services.AddAutoMapper(config =>
         {
             config.AddProfile<ListaProfile>();
+        });
+        services.AddAutoMapper(config =>
+        {
+            config.AddProfile<ProdutoProfile>();
+        });
+        services.AddAutoMapper(config =>
+        {
+            config.AddProfile<ItensProdutoProfile>();
         });
     }
 }
