@@ -4,6 +4,10 @@ Sistema desenvolvido para auxiliar usuários no gerenciamento de compras domést
 
 ---
 
+# 🤳 Demonstração
+
+![Demonstração do sistema](Midia\ApresentacaoMobile.gif)
+
 ## 📖 Sobre o Projeto
 
 Maria realiza as compras da família semanalmente, mas frequentemente esquece itens importantes ou acaba comprando produtos que já possui em casa.
