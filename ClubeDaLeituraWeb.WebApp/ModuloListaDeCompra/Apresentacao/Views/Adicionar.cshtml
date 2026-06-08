@@ -29,10 +29,10 @@ else
                 <form asp-action="AdicionarAoCarrinho" method="post">
 
                     <input type="hidden" name="ProdutoId" value="@item.Id" />
+                    <input type="hidden" name="ListaId" value="@ViewBag.IdLista" />
 
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
-
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">@item.ProdutoNome</h5>
                                 <span class="badge text-bg-secondary fs-6">
@@ -57,12 +57,9 @@ else
                             <button type="submit" class="btn btn-success w-100 rounded-pill">
                                 Adicionar
                             </button>
-
                         </div>
                     </div>
-
                 </form>
-
             </div>
         }
 

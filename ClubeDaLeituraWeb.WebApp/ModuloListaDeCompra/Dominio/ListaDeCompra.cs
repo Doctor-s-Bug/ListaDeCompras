@@ -50,5 +50,10 @@ public class ListaDeCompra : EntidadeBase<ListaDeCompra>
     {
         Nome = entidadeAtualizada.Nome;
         StatusLista = entidadeAtualizada.StatusLista;
+        ListaProdutos = entidadeAtualizada.ListaProdutos;
+    }
+    public void AddItem(ItensProduto itensProduto)
+    {
+        ListaProdutos.Add(itensProduto);
     }
 }

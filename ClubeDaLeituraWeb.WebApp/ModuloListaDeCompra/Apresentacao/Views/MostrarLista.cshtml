@@ -30,6 +30,7 @@
                             <th>Categoria</th>
                             <th>Quantidade</th>
                             <th>Preço</th>
+                            <th class="d-flex  justify-content-center">Ações</th>
                         </tr>
                     </thead>
 
@@ -43,25 +44,19 @@
                                 <td>@c.Quantidade</td>
                                 <td>R$@c.Preco</td>
                                 <td>
-                                    <div class="d-flex gap-2">
-                                        <button type="button" class="btn-close" disabled aria-label="Close bg-red"
-                                                asp-route-idProduto="@c.Id"></button>
+                                    <div class="d-flex gap-2 justify-content-center">
+                                        <button type="button" class="btn btn-primary fs-7"
+                                                asp-route-idProduto="@c.Id">Remover</button>
                                     </div>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-
-                <div class="d-flex justify-content-between align-items-center fs-3">
-
-                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3 p-2" asp-action="Adicionar"
-                       asp-route-id="@Model.Id">Adicionar Produto</a>
-                </div>
-
                 <div class="d-flex justify-content-start gap-2 mt-4">
                     <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
-                    <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+                    <a class="btn btn-primary rounded-pill px-4" asp-action="Adicionar"
+                       asp-route-id="@Model.Id">Adicionar Produto</a>
                 </div>
             </div>
         </div>

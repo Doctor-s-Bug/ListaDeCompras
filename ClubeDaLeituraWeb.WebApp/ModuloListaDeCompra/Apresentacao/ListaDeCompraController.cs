@@ -106,6 +106,8 @@ public class ListaDeCompraController : Controller
     }
     public ActionResult Adicionar(string id)
     {
+        ViewBag.IdLista = id;
+
         ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(id);
 
         if (listaDeCompra == null)
@@ -116,6 +118,25 @@ public class ListaDeCompraController : Controller
         List<ListarItensProdutos> produtosVm = mapeador.Map<List<ListarItensProdutos>>(produtos);
 
         return View(produtosVm);
+    }
+    [HttpPost]
+    public ActionResult AdicionarAoCarrinho(AdicionarItemViewModel vm)
+    {
+        Produto? produto = repositorioProduto.SelecionarPorId(vm.ProdutoId);
+        ListaDeCompra? listaAtualizada = repositorioListaDeCompra.SelecionarPorId(vm.ListaId);
+
+        if (listaAtualizada == null || produto == null)
+            return RedirectToAction(nameof(MostrarLista));
+
+        ItensProduto item = new(produto, vm.Quantidade);
+
+        listaAtualizada.AddItem(item);
+
+        repositorioListaDeCompra.Editar(vm.ListaId, listaAtualizada);
+
+        return RedirectToAction(nameof(MostrarLista), new { id = listaAtualizada.Id }
+);
+
     }
     public List<ListarProdutosViewModel> CarregarProdutos()
     {
