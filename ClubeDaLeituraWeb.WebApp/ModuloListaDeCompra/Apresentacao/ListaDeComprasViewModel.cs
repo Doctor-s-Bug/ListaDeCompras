@@ -7,7 +7,7 @@ public record ListarListasViewModel(
     string Id,
     string Nome,
     StatusLista StatusLista,
-    List<ListarProdutoViewModel> Produtos,
+    List<ListarItensProdutos> Produtos,
     decimal ValorTotal,
     string DataCriacao
 );

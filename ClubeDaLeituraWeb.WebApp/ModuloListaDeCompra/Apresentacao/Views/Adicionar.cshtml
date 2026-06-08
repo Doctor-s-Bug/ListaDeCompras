@@ -1,62 +1,70 @@
-@*
 @{
     Layout = "_Layout";
-    ViewBag.Titulo = "Listagem de Produtos";
-    List<ListarProdutosViewModel> produtos = ViewBag.Produtos;
+    ViewBag.Titulo = "Adicionar Produto à Lista";
 }
-@model List<ListarItemViewModel>
 
-<body>
-    <a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
+@model List<ListarItensProdutos>
 
-    @if (TempData["MensagemErro"] != null)
-    {
-        <div class="alert alert-danger">
-            @TempData["MensagemErro"]
-        </div>
-    }
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["MensagemErro"]
+    </div>
+}
 
-    @if (@Model.Count == 0)
-    {
-        <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
-            Nenhuma Categoria Cadastrada.
-        </div>
-    }
-    else
-    {
-        <div class="row g-3">
-            @foreach (ListarItemViewModel item in Model)
-            {
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+@if (!Model.Any())
+{
+    <div class="alert alert-primary border-start border-primary border-2 rounded-3">
+        Nenhum Produto Cadastrado.
+    </div>
+}
+else
+{
+    <div class="row g-3">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                <form asp-action="AdicionarAoCarrinho" method="post">
+
+                    <input type="hidden" name="ProdutoId" value="@item.Id" />
+
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
+
                             <div class="d-flex justify-content-between align-items-center">
-                                <option value="">Selecione uma categoria</option>
-                    @foreach (ListarProdutosViewModel produto in produtos)
-                    {
-                        <option value="@produto.Id">
-                            @produto.Nome
-                        </option>
-                    }
+                                <h5 class="card-title">@item.ProdutoNome</h5>
+                                <span class="badge text-bg-secondary fs-6">
+                                    @item.Categoria
+                                </span>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">R$@item.PrecoAproximado.ToString("F2")</h5>
-                                <p class="card-text mb-2">
-                                    <strong>Unidade: @item.UnidadeMedida</strong>
-                                </p>
+                            <hr />
+
+                            <p class="card-text">
+                                <strong>Preço:</strong>
+                                R$ @item.Preco.ToString("F2")
+                            </p>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">
+                                    Quantidade
+                                </label>
+
+                                <input type="number" name="Quantidade" value="1" min="1" class="form-control" />
                             </div>
-                            <div class="d-flex align-items-center">
-                                <strong class="me-2">Categoria:</strong>
-                                <span class="ms-2">@item.Categoria</span>
-                            </div>
-                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3 p-2" asp-action="Editar"
-                               asp-route-id="@item.Id">Editar</a>
-                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3 mt-3 p-2" asp-action="Excluir"
-                               asp-route-id="@item.Id">Excluir</a>
+
+                            <button type="submit" class="btn btn-success w-100 rounded-pill">
+                                Adicionar
+                            </button>
+
                         </div>
                     </div>
-                </div>
-            }
-        </div>
-    }
-</body> *@
+
+                </form>
+
+            </div>
+        }
+
+    </div>
+}

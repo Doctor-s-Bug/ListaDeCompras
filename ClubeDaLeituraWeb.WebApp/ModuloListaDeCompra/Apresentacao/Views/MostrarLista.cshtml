@@ -15,7 +15,7 @@
             </div>
             <div class="d-flex justify-content-between align-items-center fs-5">
                 <p class="card-text mb-2">
-                    <strong>Valor Total: @Model.ValorTotal</strong>
+                    <strong>Valor Total: R$ @Model.ValorTotal</strong>
                 </p>
                 <p class="card-text mb-2">
                     <strong>Status:</strong> @Model.StatusLista
@@ -35,13 +35,13 @@
 
                     <tbody>
 
-                        @foreach (ListarProdutoViewModel c in Model.Produtos)
+                        @foreach (ListarItensProdutos c in Model.Produtos)
                         {
                             <tr>
                                 <td>@c.ProdutoNome</td>
                                 <td>@c.Categoria</td>
                                 <td>@c.Quantidade</td>
-                                <td>@c.Preco</td>
+                                <td>R$@c.Preco</td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         <button type="button" class="btn-close" disabled aria-label="Close bg-red"

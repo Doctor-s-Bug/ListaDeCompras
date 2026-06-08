@@ -1,4 +1,5 @@
 using AutoMapper;
+using ClubeDaLeituraWeb.WebApp.ModuloItensProduto.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloProduto.Apresentacao;
 

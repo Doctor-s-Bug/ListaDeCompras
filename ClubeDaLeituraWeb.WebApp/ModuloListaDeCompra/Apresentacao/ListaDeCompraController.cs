@@ -96,23 +96,26 @@ public class ListaDeCompraController : Controller
         if (listaDeCompra == null)
             return RedirectToAction(nameof(Listar));
 
-        List<ListarProdutoViewModel> produtosVm = mapeador.Map<List<ListarProdutoViewModel>>(listaDeCompra.ListaProdutos);
+        List<ListarItensProdutos> produtosVm = mapeador.Map<List<ListarItensProdutos>>(listaDeCompra.ListaProdutos);
 
-        ListarListasViewModel listarVm = new(listaDeCompra.Id, listaDeCompra.Nome, listaDeCompra.StatusLista, produtosVm, listaDeCompra.ValorTotal, listaDeCompra.DataCriacao.ToString("dd/MM/yyyy"));
+        ListarListasViewModel listarVm = new(listaDeCompra.Id,
+        listaDeCompra.Nome, listaDeCompra.StatusLista, produtosVm,
+        listaDeCompra.ValorTotal, listaDeCompra.DataCriacao.ToString("dd/MM/yyyy"));
 
         return View(listarVm);
     }
     public ActionResult Adicionar(string id)
     {
-        ListaDeCompra? listaSelecionada = repositorioListaDeCompra.SelecionarPorId(id);
+        ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(id);
 
-        List<ListarProdutoViewModel> itensProdutoProfile = [];
+        if (listaDeCompra == null)
+            return RedirectToAction(nameof(Listar));
 
-        ListarProdutoViewModel listaVm = mapeador.Map<ListarProdutoViewModel>(listaSelecionada);
+        List<Produto?> produtos = repositorioProduto.SelecionarTodos();
 
-        ViewBag.Produtos = CarregarProdutos();
+        List<ListarItensProdutos> produtosVm = mapeador.Map<List<ListarItensProdutos>>(produtos);
 
-        return View();
+        return View(produtosVm);
     }
     public List<ListarProdutosViewModel> CarregarProdutos()
     {

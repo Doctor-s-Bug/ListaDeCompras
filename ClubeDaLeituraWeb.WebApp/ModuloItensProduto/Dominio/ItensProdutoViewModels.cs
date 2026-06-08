@@ -1,6 +1,6 @@
 namespace ClubeDaLeituraWeb.WebApp.ModuloItensProduto.Dominio;
 
-public record ListarProdutoViewModel(
+public record ListarItensProdutos(
     string Id,
     string ProdutoNome,
     int Quantidade,

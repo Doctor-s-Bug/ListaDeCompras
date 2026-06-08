@@ -42,7 +42,7 @@ public class ListaProfile : Profile
         opt => opt.MapFrom(src => src.DataCriacao.ToString("dd/MM/yyyy"))
         );
         CreateMap<EditarListaViewModel, ListaDeCompra>();
-        CreateMap<Produto, ListarProdutoViewModel>();
+        CreateMap<Produto, ListarItensProdutos>();
 
     }
 }
