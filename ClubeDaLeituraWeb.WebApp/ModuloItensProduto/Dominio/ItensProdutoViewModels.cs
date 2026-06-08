@@ -12,3 +12,7 @@ public record AdicionarItemViewModel(
     string ListaId,
     int Quantidade
 );
+public record RemoverItemViewModel(
+    string ProdutoId,
+    string ListaId
+);

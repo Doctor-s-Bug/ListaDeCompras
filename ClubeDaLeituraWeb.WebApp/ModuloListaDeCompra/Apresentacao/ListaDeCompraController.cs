@@ -110,10 +110,10 @@ public class ListaDeCompraController : Controller
 
         ListaDeCompra? listaDeCompra = repositorioListaDeCompra.SelecionarPorId(id);
 
+        List<Produto> produtos = repositorioProduto.SelecionarTodos();
+
         if (listaDeCompra == null)
             return RedirectToAction(nameof(Listar));
-
-        List<Produto?> produtos = repositorioProduto.SelecionarTodos();
 
         List<ListarItensProdutos> produtosVm = mapeador.Map<List<ListarItensProdutos>>(produtos);
 
@@ -136,6 +136,34 @@ public class ListaDeCompraController : Controller
 
         return RedirectToAction(nameof(MostrarLista), new { id = listaAtualizada.Id }
 );
+    }
+    [HttpPost]
+    public ActionResult Remover(RemoverItemViewModel vm)
+    {
+        ListaDeCompra? listaAtualizada = repositorioListaDeCompra.SelecionarPorId(vm.ListaId);
+
+        if (listaAtualizada == null)
+            return RedirectToAction(nameof(MostrarLista));
+
+        ItensProduto? produto = null;
+        //selecionar o produto na lista
+        foreach (ItensProduto itens in listaAtualizada.ListaProdutos)
+        {
+            if (itens.Id == vm.ProdutoId)
+            {
+                produto = itens;
+                break;
+            }
+        }
+
+        if (produto == null)
+            return RedirectToAction(nameof(MostrarLista), new { id = listaAtualizada.Id });
+
+        listaAtualizada.RemoverItem(produto);
+
+        repositorioListaDeCompra.Editar(vm.ListaId, listaAtualizada);
+
+        return RedirectToAction(nameof(MostrarLista), new { id = listaAtualizada.Id });
 
     }
     public List<ListarProdutosViewModel> CarregarProdutos()

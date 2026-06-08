@@ -56,4 +56,8 @@ public class ListaDeCompra : EntidadeBase<ListaDeCompra>
     {
         ListaProdutos.Add(itensProduto);
     }
+    public void RemoverItem(ItensProduto itensProduto)
+    {
+        ListaProdutos.Remove(itensProduto);
+    }
 }
