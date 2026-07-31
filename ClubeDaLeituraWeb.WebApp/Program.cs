@@ -4,7 +4,7 @@ using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfraRepositories();
+builder.Services.AddInfraRepositories(builder.Configuration);
 builder.Services.AddAplicationServices();
 builder.Services.AddPresentation();
 

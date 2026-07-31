@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "sqlproj: Build ListaDeCompras",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"c:/Users/Thiago/Desktop/trabalhos/PROJETOS_ACADEMIA/ListaDeComprasWeb/ListaDeCompras/ListaDeCompras.sqlproj"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Builds the ListaDeCompras SQL project"
+		}
+	]
+}
