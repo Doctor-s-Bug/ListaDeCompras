@@ -1,12 +1,6 @@
-using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
-using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Infra;
-using ClubeDaLeituraWeb.WebApp.ModuloProduto.Dominio;
-using ClubeDaLeituraWeb.WebApp.ModuloProduto.Infra;
-using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
-using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Infra;
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Orm;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Sql;
 
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
@@ -14,9 +8,10 @@ public static class InjecaoDependencia
 {
     public static void AddInfraRepositories(this IServiceCollection services, IConfiguration configuration)
     {
-
+        //add no services o dbContext
         services.AddDbContext<ListaDeComprasDbContext>(opt =>
         {
+            //busca a string do caminho do Banco de Dados e faz a validacao
             string? connectionString = configuration.GetConnectionString("SqlServer");
 
             if (string.IsNullOrWhiteSpace(connectionString))
@@ -29,9 +24,11 @@ public static class InjecaoDependencia
             opt.UseSqlServer(connectionString);
         });
 
-        services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
-        services.AddScoped<IRepositorioProduto, RepositorioProdutoEmArquivo>();
-        services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
-        services.AddScoped<IRepositorioListaDeCompra, RepositorioListaDeCompraEmArquivo>();
+        services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
+
+        // services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
+        // services.AddScoped<IRepositorioProduto, RepositorioProdutoEmArquivo>();
+        // services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
+        // services.AddScoped<IRepositorioListaDeCompra, RepositorioListaDeCompraEmArquivo>();
     }
 }
