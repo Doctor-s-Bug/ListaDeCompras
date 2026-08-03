@@ -4,6 +4,7 @@ using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Orm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClubeDaLeituraWeb.WebApp.Migrations
 {
     [DbContext(typeof(ListaDeComprasDbContext))]
-    partial class ListaDeComprasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260803174156_Produto")]
+    partial class Produto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
