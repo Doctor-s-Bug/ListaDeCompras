@@ -1,3 +1,4 @@
+using ClubeDaLeituraWeb.WebApp.Compartilhado.Apresentacao.Mapping;
 using ClubeDaLeituraWeb.WebApp.ModuloItensProduto.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Apresentacao;
 using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
@@ -7,7 +8,7 @@ namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Apresentacao;
 
 public static class InjecaoDependencia
 {
-    public static void AddPresentation(this IServiceCollection services)
+    public static void AddPresentation(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllersWithViews().AddRazorOptions(options =>
     {
@@ -21,17 +22,18 @@ public static class InjecaoDependencia
         options.ViewLocationFormats.Add("/Compartilhado/Apresentacao/Views/{0}.cshtml");
     });
 
-        services.AddAutoMapper(config =>
+        services.AddAutoMapper(mapperConfig =>
         {
-            config.AddProfile<ListaProfile>();
-        });
-        services.AddAutoMapper(config =>
-        {
-            config.AddProfile<ProdutoProfile>();
-        });
-        services.AddAutoMapper(config =>
-        {
-            config.AddProfile<ItensProdutoProfile>();
+            AutoMapperOptions autoMapperOptions = configuration
+                .GetSection(AutoMapperOptions.SectionName)
+                .Get<AutoMapperOptions>() ?? new AutoMapperOptions();
+
+            string? licenseKey = autoMapperOptions.LicenseKey;
+
+            if (!string.IsNullOrWhiteSpace(licenseKey))
+                mapperConfig.LicenseKey = licenseKey;
+
+            mapperConfig.AddMaps(typeof(Program));
         });
     }
 }
