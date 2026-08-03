@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Dominio;
 
 public interface IRepositorio<T> where T : EntidadeBase<T>
@@ -7,5 +9,5 @@ public interface IRepositorio<T> where T : EntidadeBase<T>
     bool Excluir(string idSelecionado);
     T? SelecionarPorId(string idSelecionado);
     List<T> SelecionarTodos();
-    List<T> Filtrar(Predicate<T> filtro);
+    List<T> Filtrar(Expression<Func<T, bool>> filtro);
 }

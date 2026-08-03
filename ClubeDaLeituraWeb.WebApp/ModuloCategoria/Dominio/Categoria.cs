@@ -3,7 +3,6 @@ using ClubeDaLeituraWeb.WebApp.Compartilhado.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 
-
 public class Categoria : EntidadeBase<Categoria>
 {
     public string Nome { get; set; }

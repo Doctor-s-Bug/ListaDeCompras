@@ -1,6 +1,8 @@
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Orm;
 using Microsoft.EntityFrameworkCore;
 using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Sql;
+using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Infra;
 
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
@@ -26,7 +28,7 @@ public static class InjecaoDependencia
 
         services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
 
-        // services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
+        services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmOrm>();
         // services.AddScoped<IRepositorioProduto, RepositorioProdutoEmArquivo>();
         // services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
         // services.AddScoped<IRepositorioListaDeCompra, RepositorioListaDeCompraEmArquivo>();

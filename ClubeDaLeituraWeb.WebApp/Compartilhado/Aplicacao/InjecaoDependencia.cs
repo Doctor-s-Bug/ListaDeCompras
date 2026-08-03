@@ -7,7 +7,7 @@ public static class InjecaoDependencia
 {
     public static void AddAplicationServices(this IServiceCollection services)
     {
-        // services.AddScoped<ServicoCategoria>();
+        services.AddScoped<ServicoCategoria>();
         // services.AddScoped<ServicoLista>();
     }
 }
