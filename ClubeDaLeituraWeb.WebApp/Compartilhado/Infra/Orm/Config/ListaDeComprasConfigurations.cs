@@ -23,6 +23,10 @@ public class ListaDeComprasConfigurations : IEntityTypeConfiguration<ListaDeComp
         builder.Property(l => l.StatusLista)
         .IsRequired();
 
+        builder.Property(l => l.ValorTotal)
+        .IsRequired()
+        .HasPrecision(18,  2);
+
         builder.HasMany(l => l.Produtos)
         .WithOne(p => p.ListaDeCompra)
         .HasForeignKey("ItensProdutoId")

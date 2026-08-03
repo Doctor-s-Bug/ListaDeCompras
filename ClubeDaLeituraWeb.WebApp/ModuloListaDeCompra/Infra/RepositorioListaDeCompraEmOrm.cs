@@ -14,6 +14,9 @@ public class RepositorioListaDeCompraEmOrm(ListaDeComprasDbContext dbContext)
     }
     public override ListaDeCompra? SelecionarPorId(string idSelecionado)
     {
-        return registros.Include(l => l.Produtos).SingleOrDefault(l => idSelecionado == l.Id);
+        return registros.Include(l => l.Produtos)
+        .ThenInclude(p => p.Produto)
+        .ThenInclude(p => p.Categoria)
+        .SingleOrDefault(l => idSelecionado == l.Id);
     }
 }

@@ -24,6 +24,7 @@ public class ListaDeCompra : EntidadeBase<ListaDeCompra>
             }
             return total;
         }
+        set;
     }
 
     public ListaDeCompra()
