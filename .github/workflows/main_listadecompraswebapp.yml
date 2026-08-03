@@ -21,7 +21,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.x'
+          dotnet-version: "10.x"
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
@@ -47,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -55,11 +55,21 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F2420B80A50E4921B5902FC283E5E3EE }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7D5C317A8A044036B02DD496F1C78D92 }}
 
+      - name: Configure Azure Web App settings
+        shell: pwsh
+        run: |
+          az webapp config appsettings set `
+            --resource-group "ListaDeComprasWebApp" `
+            --name "ListaDeComprasWeb" `
+            --settings `
+              "ASPNETCORE_ENVIRONMENT=Production" `
+              "ConnectionStrings__SqlServerEF=${{ secrets.AZURE_SQL_CONNECTION_STRINGS }}" `
+              "AutoMapper__LicenseKey=${{ secrets.AUTOMAPPER_LICENSE_KEY }}"
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'ListaDeComprasWebApp'
-          slot-name: 'Production'
+          app-name: "ListaDeComprasWebApp"
+          slot-name: "Production"
           package: .
-          
