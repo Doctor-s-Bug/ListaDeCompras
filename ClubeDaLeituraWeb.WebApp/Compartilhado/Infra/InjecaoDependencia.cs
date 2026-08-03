@@ -5,6 +5,8 @@ using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloCategoria.Infra;
 using ClubeDaLeituraWeb.WebApp.ModuloProduto.Dominio;
 using ClubeDaLeituraWeb.WebApp.ModuloProduto.Infra;
+using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
+using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Infra;
 
 namespace ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Arquivos;
 
@@ -32,7 +34,6 @@ public static class InjecaoDependencia
 
         services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmOrm>();
         services.AddScoped<IRepositorioProduto, RepositorioProdutoEmOrm>();
-        // services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
-        // services.AddScoped<IRepositorioListaDeCompra, RepositorioListaDeCompraEmArquivo>();
+        services.AddScoped<IRepositorioListaDeCompra, RepositorioListaDeCompraEmOrm>();
     }
 }

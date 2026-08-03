@@ -8,14 +8,14 @@ public class ListaDeCompra : EntidadeBase<ListaDeCompra>
     public string Nome { get; set; }
     public DateTime DataCriacao { get; set; } = DateTime.Today;
     public StatusLista StatusLista { get; set; } = StatusLista.Aberta;
-    public List<ItensProduto> ListaProdutos { get; set; } = new();
+    public List<ItensProduto> Produtos { get; set; } = [];
     public decimal ValorTotal
     {
         get
         {
             decimal total = 0;
 
-            foreach (ItensProduto item in ListaProdutos)
+            foreach (ItensProduto item in Produtos)
             {
                 decimal precoProduto = item.Produto.PrecoAproximado;
                 decimal Quantidade = item.QuantidadeProduto;
@@ -50,14 +50,14 @@ public class ListaDeCompra : EntidadeBase<ListaDeCompra>
     {
         Nome = entidadeAtualizada.Nome;
         StatusLista = entidadeAtualizada.StatusLista;
-        ListaProdutos = entidadeAtualizada.ListaProdutos;
+        Produtos = entidadeAtualizada.Produtos;
     }
     public void AddItem(ItensProduto itensProduto)
     {
-        ListaProdutos.Add(itensProduto);
+        Produtos.Add(itensProduto);
     }
     public void RemoverItem(ItensProduto itensProduto)
     {
-        ListaProdutos.Remove(itensProduto);
+        Produtos.Remove(itensProduto);
     }
 }

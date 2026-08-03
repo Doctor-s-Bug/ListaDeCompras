@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using ClubeDaLeituraWeb.WebApp.ModuloListaDeCompra.Dominio;
 
 namespace ClubeDaLeituraWeb.WebApp.ModuloItensProduto.Dominio;
 
@@ -8,6 +9,7 @@ public class ItensProduto
     public string Id { get; set; }
     public Produto Produto { get; set; }
     public int QuantidadeProduto { get; set; }
+    public ListaDeCompra ListaDeCompra {get; set;}
     public ItensProduto()
     {
 

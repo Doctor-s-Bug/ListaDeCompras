@@ -23,7 +23,7 @@ public class ListaProfile : Profile
             )
             .ForCtorParam(
                 "Produtos",
-                opt => opt.MapFrom(src => src.ListaProdutos)
+                opt => opt.MapFrom(src => src.Produtos)
             )
             .ForCtorParam(
                 "ValorTotal",

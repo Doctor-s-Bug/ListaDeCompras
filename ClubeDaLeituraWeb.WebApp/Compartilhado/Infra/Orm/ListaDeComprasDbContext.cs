@@ -20,5 +20,7 @@ public class ListaDeComprasDbContext(DbContextOptions<ListaDeComprasDbContext> o
         //Aplica a configuracao no builder do DbContext
 
         modelBuilder.ApplyConfiguration(new CategoriaConfiguration());
+        modelBuilder.ApplyConfiguration(new ProdutoConfigurations());
+        modelBuilder.ApplyConfiguration(new ListaDeComprasConfigurations());
     }
 }

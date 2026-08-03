@@ -96,7 +96,7 @@ public class ListaDeCompraController : Controller
         if (listaDeCompra == null)
             return RedirectToAction(nameof(Listar));
 
-        List<ListarItensProdutos> produtosVm = mapeador.Map<List<ListarItensProdutos>>(listaDeCompra.ListaProdutos);
+        List<ListarItensProdutos> produtosVm = mapeador.Map<List<ListarItensProdutos>>(listaDeCompra.Produtos);
 
         ListarListasViewModel listarVm = new(listaDeCompra.Id,
         listaDeCompra.Nome, listaDeCompra.StatusLista, produtosVm,
@@ -147,7 +147,7 @@ public class ListaDeCompraController : Controller
 
         ItensProduto? produto = null;
         //selecionar o produto na lista
-        foreach (ItensProduto itens in listaAtualizada.ListaProdutos)
+        foreach (ItensProduto itens in listaAtualizada.Produtos)
         {
             if (itens.Id == vm.ProdutoId)
             {

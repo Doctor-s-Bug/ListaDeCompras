@@ -20,10 +20,12 @@ public class ProdutoConfigurations : IEntityTypeConfiguration<Produto>
         .HasMaxLength(100);
 
         builder.Property(p => p.PrecoAproximado)
-        .IsRequired();
+        .IsRequired()
+        .HasPrecision(18, 2);
 
         builder.Property(p => p.UnidadeMedida)
-        .IsRequired();
+        .IsRequired()
+        .HasPrecision(18, 2);
 
         builder.HasOne(p => p.Categoria)
         .WithMany(c => c.Produtos)

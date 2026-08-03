@@ -17,7 +17,5 @@ public class ServicoLista
     public void SelecionarTodos()
     {
         List<ListaDeCompra> listaDeCompras = repositorioListaDeCompra.SelecionarTodos();
-
-        
     }
 }

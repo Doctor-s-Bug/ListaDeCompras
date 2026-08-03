@@ -4,6 +4,7 @@ using ClubeDaLeituraWeb.WebApp.Compartilhado.Infra.Orm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClubeDaLeituraWeb.WebApp.Migrations
 {
     [DbContext(typeof(ListaDeComprasDbContext))]
-    partial class ListaDeComprasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260803181847_UpdateProduto")]
+    partial class UpdateProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +104,6 @@ namespace ClubeDaLeituraWeb.WebApp.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("PrecoAproximado")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UnidadeMedida")
